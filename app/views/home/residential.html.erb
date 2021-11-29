@@ -116,6 +116,13 @@
                   </li>
                   <%end%>
                 <% end %>
+                <% if user_signed_in?%>
+                  <% if current_user.admin == true || current_user.employee == true%>
+                  <li>
+                    <a class='navbar-link' href="/intervention">INTERVENTION</a>
+                  </li>
+                  <%end%>
+                <% end %>
                 <% if user_signed_in? %>
                   <li>      
                     <%= link_to 'EDIT PROFILE' , edit_user_registration_path, :class=> 'navbar-link' %>

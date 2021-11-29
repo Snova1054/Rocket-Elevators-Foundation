@@ -150,6 +150,18 @@ while i < 10 do
             notes: Faker::Lorem.paragraph, 
             building: building
         )
+        intervention = Intervention.create!(
+            author: "mister bean ##{i}",
+            start_date: Faker::Time.between(from: '2018-01-1', to: '2021-11-25'),
+            end_date: Faker::Time.between(from: '2018-01-1', to: '2021-11-25'),
+            result: "Incomplete",
+            report: "Description",
+            status: "Pending",
+            customer: customer,
+            building: building,
+            battery: battery
+        )
+    
         #Column
         howManyColumn.times do 
             column = Column.create!(

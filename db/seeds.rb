@@ -146,13 +146,13 @@ while i < 10 do
             date_of_commissioning: Faker::Time.between(from: '2018-01-1', to: '2021-11-25'),
             date_of_last_inspection: Faker::Time.between(from: dateCreated, to: '2021-11-25'),
             certificate_of_operations: Faker::Number.between(from: 1, to: 5),
-            information: "", #Add more informations 
+            information: "", #Add more informations
             notes: Faker::Lorem.paragraph, 
             building: building
         )
         intervention = Intervention.create!(
             author: "mister bean ##{i}",
-            start_date: Faker::Time.between(from: '2018-01-1', to: '2021-11-25'),
+            start_date: [Faker::Time.between(from: '2018-01-1', to: '2021-11-25'), nil].sample,
             end_date: Faker::Time.between(from: '2018-01-1', to: '2021-11-25'),
             result: "Incomplete",
             report: "Description",

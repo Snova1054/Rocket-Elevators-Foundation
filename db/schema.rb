@@ -181,9 +181,9 @@ ActiveRecord::Schema.define(version: 2021_12_01_122230) do
     t.string "author", default: "", null: false
     t.datetime "start_date"
     t.datetime "end_date"
-    t.string "result", default: "incomplete", null: false
+    t.string "result", default: "Incomplete", null: false
     t.text "report", null: false
-    t.string "status", default: "pending", null: false
+    t.string "status", default: "Pending", null: false
     t.bigint "customer_id", null: false
     t.bigint "building_id", null: false
     t.bigint "battery_id", null: false

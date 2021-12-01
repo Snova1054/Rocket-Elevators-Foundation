@@ -16,9 +16,11 @@ class InterventionsController < ApplicationController
     end
     def create
         @intervention = Intervention.new(intervention_params)
-        zendesk_message = "#{@intervention.customer} \n #{@intervention.building} \n #{@intervention.battery}"
+        current_employee = Employee.find(current_user.id)
+        @intervention.author = "#{current_employee.last_name} #{current_employee.first_name}"
+        zendesk_message = "#{@intervention.customer} #{@intervention.building} #{@intervention.battery}"
         if @intervention.column
-            zendesk_message = zendesk_message + "\n #{@intervention.column}"
+            zendesk_message = zendesk_message + " #{@intervention.column}"
             if @intervention.elevator
                 zendesk_message = zendesk_message + "\n #{@intervention.elevator}"
             end
@@ -27,13 +29,16 @@ class InterventionsController < ApplicationController
             zendesk_message = zendesk_message + "\n #{@intervention.employee.first_name}"
         end
         zendesk_message = zendesk_message + "\n #{@intervention.report}"
-        ZendeskAPI::Ticket.create!($client, :subject => current_user.email, :requester => { :name => current_user.email, :email => current_user.email }, :comment => { :body => "#{zendesk_message}" }, :priority => "urgent")
-      
+        ZendeskAPI::Ticket.create!($client, :type=> ["Problem", "Question"].sample, :subject => "message", :requester => { :name => "RockeTeam", :email => "rocketeam1234@gmail.com" }, :comment => { :body => "Hello problem here #{@intervention.report}" }, :priority => "urgent")
+        @intervention.save
+        redirect_to interventions_path
     end
+    # apparently it's only :type => "Question"
+    # or to be more precise, type: "Question"
 
     private
     def intervention_params
-      params.require(:intervention).permit(:author, :start_date, :end_date, :report, :customer, :building, :battery, :column, :elevator, :employee)
+      params.require(:intervention).permit(:author, :start_date, :end_date, :report, :customer_id, :building_id, :battery_id, :column_id, :elevator_id, :employee_id)
     end
   
 end

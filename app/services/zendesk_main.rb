@@ -3,10 +3,10 @@ require 'zendesk_api'
 $client = ZendeskAPI::Client.new do |config|
   # Mandatory:
 
-  config.url = "https://rocket-elevators-tickets.zendesk.com/api/v2" # e.g. https://yoursubdomain.zendesk.com/api/v2
+  config.url = "https://rocket-elevators-lets-help.zendesk.com/api/v2" # e.g. https://yoursubdomain.zendesk.com/api/v2
 
   # Basic / Token Authentication
-  config.username = "rocketeam1234@gmail.com"
+  config.username = "daniel.galish@gmail.com"
 
   # Choose one of the following depending on your authentication choice
   config.token = ENV["zendesk_api_key"]

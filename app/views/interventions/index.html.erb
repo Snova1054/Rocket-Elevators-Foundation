@@ -1,27 +1,43 @@
-<h1> hey </h1>
+<!--<h1> <%= current_user.email%> </h1> -->
+<h1> Create an intervention </h1>
     <%= form_for (@intervention) do |f| %>
 
-      <div class= "field">
+      <div class= "field col-md-12">
         <%= f.label :customer_id, "Customers: *" %><br>
         <%= f.collection_select :customer_id, @customers.order(:company_name), :id, :company_name, { prompt: "Select a Customer"}, {} %>
       </div>
 
-      <div class= "field">
+      <div class= "field col-md-12">
         <%= f.label :building_id, "Buildings: *" %><br>
         <%= f.grouped_collection_select :building_id, @customers.order(:company_name), :buildings, :company_name, :id, :id, { prompt: "Select a Building"}, {} %>
       </div>
 
-      <div class= "field">
+      <div class= "field col-md-12">
         <%= f.label :battery_id, "Battery: *" %><br>
         <%= f.grouped_collection_select :battery_id, @buildings.order(:id), :batteries, :id, :id, :id, { include_blank: true }, {} %>
         <%#  { include_blank: true }%>
       </div>
 
-      <p style="display: block;" id="submitButton" onclick="alertbox()">
+      <div class= "field col-md-12">
+        <%= f.label :column_id, "Column: " %><br>
+        <%= f.grouped_collection_select :column_id, @batteries.order(:id), :columns, :id, :id, :id, { include_blank: true }, {} %>
+      </div>
 
-        <button class="g-recaptcha, btn btn-success btn-lg"
-        data-sitekey=<%="#{ENV['google_captcha']}"%>
-        data-callback='onSubmit'
-        data-action='submit'>Submit</button>
-      </p>
+      <div class= "field col-md-12">
+        <%= f.label :elevator_id, "Elevator: " %><br>
+        <%= f.grouped_collection_select :elevator_id, @columns.order(:id), :elevators, :id, :id, :id, { include_blnk: true }, {} %>
+      </div>
+
+      <div class= "field col-md-12">
+        <%= f.label :employee_id, "Employee: " %><br>
+        <%= f.collection_select :employee_id, @employees.order(:id), :id, :first_name, { prompt: "Select a Customer"}, {} %>
+      </div>
+
+      <div class= "field col-md-12">
+        <%= f.label :report, :"Description *" %>
+        <%= f.text_area :report, :class=> 'form-control'%>
+      </div>
+
+
+      <%= f.submit %>
     <% end %>

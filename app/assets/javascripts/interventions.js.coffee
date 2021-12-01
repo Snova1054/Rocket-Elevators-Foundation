@@ -91,14 +91,14 @@ jQuery ->
     $('#new_intervention').change ->
         option_battery = $("#intervention_battery_id :selected").val()
         option_text = $('#intervention_report').val()
-        if option_battery and option_battery != undefined and option_battery != "1" and option_text and option_text != ""
+        if option_battery and option_battery != undefined and option_text and option_text != ""
             $('.submits').show()
         else
             $('.submits').hide()
     $('#intervention_report').keydown ->
         option_battery = $("#intervention_battery_id :selected").text()
         option_text = $('#intervention_report').val()
-        if option_battery and option_battery != undefined and option_battery != "1" and option_text and option_text != ""
+        if option_battery and option_battery != undefined and option_text and option_text != ""
             $('.submits').show()
         else
             $('.submits').hide()

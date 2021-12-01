@@ -3,6 +3,7 @@ jQuery ->
     $('#intervention_battery_id').parent().hide()
     $('#intervention_column_id').parent().hide()
     $('#intervention_elevator_id').parent().hide()
+    $('.submits').hide()
     buildings = $('#intervention_building_id').html()
     $('#intervention_customer_id').change ->
         customer = $('#intervention_customer_id :selected').text()
@@ -86,3 +87,18 @@ jQuery ->
         else
             $('#intervention_elevator_id').empty()
             $('#intervention_elevator_id').parent().hide()
+
+    $('#new_intervention').change ->
+        option_battery = $("#intervention_battery_id :selected").val()
+        option_text = $('#intervention_report').val()
+        if option_battery and option_battery != undefined and option_battery != "1" and option_text and option_text != ""
+            $('.submits').show()
+        else
+            $('.submits').hide()
+    $('#intervention_report').keydown ->
+        option_battery = $("#intervention_battery_id :selected").text()
+        option_text = $('#intervention_report').val()
+        if option_battery and option_battery != undefined and option_battery != "1" and option_text and option_text != ""
+            $('.submits').show()
+        else
+            $('.submits').hide()

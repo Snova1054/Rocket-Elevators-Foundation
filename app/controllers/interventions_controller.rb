@@ -33,8 +33,6 @@ class InterventionsController < ApplicationController
         @intervention.save
         redirect_to interventions_path
     end
-    # apparently it's only :type => "Question"
-    # or to be more precise, type: "Question"
 
     private
     def intervention_params

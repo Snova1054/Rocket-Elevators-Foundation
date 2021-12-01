@@ -1,5 +1,3 @@
-<% current_employee = Employee.find(current_user.id)%>
-<h1> <%= "#{current_employee.last_name} #{current_employee.first_name}"%> </h1>
 <h1> Create an intervention </h1>
     <%= form_for (@intervention) do |f| %>
 
@@ -15,8 +13,7 @@
 
       <div class= "field col-md-12">
         <%= f.label :battery_id, "Battery: *" %><br>
-        <%= f.grouped_collection_select :battery_id, @buildings.order(:id), :batteries, :id, :id, :id, { prompt: "Select a Building"}, {} %>
-        <%#  { include_blank: true }%>
+        <%= f.grouped_collection_select :battery_id, @buildings.order(:id), :batteries, :id, :id, :id, {}, {} %>
       </div>
 
       <div class= "field col-md-12">
@@ -39,6 +36,6 @@
         <%= f.text_area :report, :class=> 'form-control'%>
       </div>
 
+      <%= f.submit  class: 'submits'%>
 
-      <%= f.submit %>
     <% end %>

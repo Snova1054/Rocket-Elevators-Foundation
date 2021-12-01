@@ -1,9 +1,23 @@
 class InterventionsController < ApplicationController
     before_action :authenticate_user!, :only => [:index]
-#   def show
-#     redirect_to main_app.root_path unless current_user && current_user.admin? || current_user.employee?
-#     # redirect_to :back #"#home"#:authenticate_user!, :only => [:show]
-#     # puts(signed_in?)
-#     # puts(@user)
-#   end
+    def new
+        @intervention = Intervention.new
+    end
+    def index
+        @customers = Customer.all
+        @buildings = Building.all
+        @batteries = Battery.all
+        @columns = Column.all
+        @elevators = Elevator.all
+        @intervention = Intervention.new
+    end
+    def create
+        @intervention = Intervention.create(intervention_params)
+    end
+
+    private
+    def intervention_params
+      params.require(:intervention).permit(:author, :start_date, :end_date, :report, :customer, :building, :battery, :column, :elevator)
+    end
+  
 end

@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   root 'home#index'
   resources :home
   resources :quotes
-  # resources :interventions
   # get 'interventions/index'
+  resources :interventions
   get 'intervention', to: 'interventions#index'
   get 'quote', to: 'quotes#new'
   get 'commercial', to: 'home#commercial'

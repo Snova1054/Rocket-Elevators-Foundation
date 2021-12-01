@@ -1,75 +1,27 @@
 <h1> hey </h1>
-    <%= form_with scope: :quote, url: quotes_path, local: true do |form| %>
+    <%= form_for (@intervention) do |f| %>
 
-      <p>
-        <%= form.label :email, :"Email *" %><br>
-        <%= form.text_field :email, :required=> 'required' %>
-      </p>
-
-      <p>
-        <%= form.label :company_name, :"Company Name *" %><br>
-        <%= form.text_field :company_name, :required=> 'required' %>
-      </p>
-
-      <p onchange="getSelectValue()">
-        <%= form.label :building_type %><br>
-          <%= form.select :building_type, [["Select", "select" ], ["Residential", "residential" ],
-            ["Commercial", "commercial" ], ["Corporate", "corporateHybrid" ], ["Hybrid", "corporateHybrid" ]] %>
-      </p>
-      <div id="floorBasement" style="display: none;">
-        <p oninput="whichRadioButton()">
-          <%= form.label :floor, :"Number of Floor :" %><br>
-            <%= form.number_field :floor, min: 2, :required=> 'required' %>
-        </p>
-
-
-        <p oninput="whichRadioButton()">
-          <%= form.label :basement, :"Number of Basement :" %><br>
-            <%= form.number_field :basement, min: 0 , :required=> 'required'%>
-        </p>
+      <div class= "field">
+        <%= f.label :customer_id, "Customers: *" %><br>
+        <%= f.collection_select :customer_id, @customers.order(:company_name), :id, :company_name, { prompt: "Select a Customer"}, {} %>
       </div>
-      
-      <%# Residential %>
-        <div id="residential">
-          <p oninput="residential()">
-            <%= form.label :appartement, :"Number of Appartement :" %><br>
-              <%= form.number_field :appartement, min: 1%>
-          </p>
 
-        </div>
-            <%# Radio Button for Hybrid and Corporate %>
-              <div id="radio_button" style="display: none;" onchange="whichRadioButton()">
-                <p>
-                  <%= form.radio_button :plan, 'standard', :required=> 'required' %>
-                    <%= form.label :plan, 'Standard' , :value=> 'standard' %>
-                      <%= form.radio_button :plan, 'premium' %>
-                        <%= form.label :plan, 'Premium' , :value=> 'premium' %>
-                          <%= form.radio_button :plan, 'excelium' %>
-                            <%= form.label :plan, 'Excelium' , :value=> 'excelium' %>
-                </p>
+      <div class= "field">
+        <%= f.label :building_id, "Buildings: *" %><br>
+        <%= f.grouped_collection_select :building_id, @customers.order(:company_name), :buildings, :company_name, :id, :id, { prompt: "Select a Building"}, {} %>
+      </div>
 
-              </div>
+      <div class= "field">
+        <%= f.label :battery_id, "Battery: *" %><br>
+        <%= f.grouped_collection_select :battery_id, @buildings.order(:id), :batteries, :id, :id, :id, { include_blank: true }, {} %>
+        <%#  { include_blank: true }%>
+      </div>
 
+      <p style="display: block;" id="submitButton" onclick="alertbox()">
 
-              <%# Result %>
-                <div id="result" style="display: none;">
-                  <h2> Elevator Needed : <span id="elevatorNeeded"></span></h2>
-                  <%= form.hidden_field :elevator_needed %>
-                    <h2>Price per Cage :<span id="cageNeeded"></span>$</h2>
-                    <%= form.hidden_field :cageNeeded %>
-                      <h2>Elevator Price : <span id="price"> Price</span>$</h2>
-                      <%= form.hidden_field :price %>
-                        <h2>Installation Fees : <span id="fees"> Price</span>$</h2>
-                        <%= form.hidden_field :fees %>
-                          <h1>Total Price :<span id="totalPrice"></span>$</h1>
-                          <%= form.hidden_field :total_price %>
-                </div>
-
-                <p style="display: none;" id="submitButton" onclick="alertbox()">
-                  
-                  <button class="g-recaptcha, btn btn-success btn-lg"  
-                  data-sitekey=<%="#{ENV['google_captcha']}"%>
-                  data-callback='onSubmit' 
-                  data-action='submit'>Submit</button>
-                </p>
-        <% end %>
+        <button class="g-recaptcha, btn btn-success btn-lg"
+        data-sitekey=<%="#{ENV['google_captcha']}"%>
+        data-callback='onSubmit'
+        data-action='submit'>Submit</button>
+      </p>
+    <% end %>

@@ -89,6 +89,7 @@ jQuery ->
             $('#intervention_elevator_id').parent().hide()
 
     $('#new_intervention').change ->
+        $('.submits').hide()
         option_battery = $("#intervention_battery_id :selected").val()
         option_text = $('#intervention_report').val()
         if option_battery and option_battery != undefined and option_text and option_text != ""
@@ -96,7 +97,8 @@ jQuery ->
         else
             $('.submits').hide()
     $('#intervention_report').keydown ->
-        option_battery = $("#intervention_battery_id :selected").text()
+        $('.submits').hide()
+        option_battery = $("#intervention_battery_id :selected").val()
         option_text = $('#intervention_report').val()
         if option_battery and option_battery != undefined and option_text and option_text != ""
             $('.submits').show()

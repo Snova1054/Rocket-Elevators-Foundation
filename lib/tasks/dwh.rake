@@ -4,7 +4,7 @@ namespace :dwh do
     require 'securerandom'
 @interventionID = 1
                
-    task :create_table do
+    task :create_tables do
         # Output a table of current connections to the DB 
         conn = PG.connect( dbname: 'data_warehouse', user: 'postgres' )
         conn.exec( "

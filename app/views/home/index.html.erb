@@ -19,6 +19,7 @@
     href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600%7CRaleway:300,400,500,600,700%7CLato:300,400,400italic,600,700"
     rel="stylesheet" type="text/css" />
 
+</head>
 
 <body class="enable-animation">
   <!-- wrapper -->
@@ -36,7 +37,6 @@
           <a class="logo float-left scrollTo" href="#top">
             <%= image_tag "/images/R2.png" %>
           </a>
-
           <!-- 
 							Top Nav 
 							
@@ -103,14 +103,15 @@
                   <li>
                     <%= link_to "LOGOUT" , destroy_user_session_path, method: :delete, :class=> 'navbar-link' %>
                   </li>
-                  <% else %>
-                    <li>
-                      <%= link_to "LOGIN" , new_user_session_path, :class=> 'navbar-link' %>
-                    </li>
-                    <li>
-                      <%= link_to "SIGN UP" , new_user_registration_path, :class=> 'navbar-link' %>
-                    </li>
-                    <% end %>
+                <% else %>
+                  <li>
+                    <%= link_to "LOGIN" , new_user_session_path, :class=> 'navbar-link' %>
+                  </li>
+                  <li>
+                    <%= link_to "SIGN UP" , new_user_registration_path, :class=> 'navbar-link' %>
+                  </li>
+                <% end %>
+              </ul>
             </nav>
           </div>
         </div>
@@ -1094,32 +1095,32 @@
       </div>
     </footer>
     <!-- /FOOTER -->
-  </div>
-  <!-- /wrapper -->
 
-  <!-- SCROLL TO TOP -->
-  <a href="#" id="toTop"></a>
+    <!-- SCROLL TO TOP -->
+    <a href="#" id="toTop"></a>
 
-  <!-- JAVASCRIPT FILES -->
-  <script>
-    var plugin_path = "assets/plugins/";
-  </script>
-  <script src="assets/plugins/jquery/jquery-3.3.1.min.js"></script>
-
-  <script src="assets/scripts.js"></script>
-   <script src="https://www.google.com/recaptcha/api.js"></script>
+    <!-- JAVASCRIPT FILES -->
     <script>
-   function onSubmit(token) {
-     document.getElementById("demo-form").submit();}
- </script>
- <script src=<%="https://www.google.com/recaptcha/api.js?render=#{ENV['google_captcha']}"%>></script>
+      var plugin_path = "assets/plugins/";
+    </script>
+<!--    <script src="assets/plugins/jquery/jquery-3.3.1.min.js"></script> -->
+
+<!--    <script src="assets/scripts.js"></script> -->
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+      <script>
+    function onSubmit(token) {
+      document.getElementById("demo-form").submit();}
+  </script>
+  <script src=<%="https://www.google.com/recaptcha/api.js?render=#{ENV['google_captcha']}"%>></script>
 
 
 
-  <!-- REVOLUTION SLIDER -->
-  <script src="assets/plugins/slider.revolution/js/jquery.themepunch.tools.min.js"></script>
-  <script src="assets/plugins/slider.revolution/js/jquery.themepunch.revolution.min.js"></script>
-  <script src="assets/view/demo.revolution_slider.js"></script>
+    <!-- REVOLUTION SLIDER -->
+    <script src="assets/plugins/slider.revolution/js/jquery.themepunch.tools.min.js"></script>
+    <script src="assets/plugins/slider.revolution/js/jquery.themepunch.revolution.min.js"></script>
+    <script src="assets/view/demo.revolution_slider.js"></script>
+      <!-- /wrapper -->
+  </div>
 </body>
 
 </html>

@@ -2,10 +2,12 @@ require 'zendesk_main'
 
 class InterventionsController < ApplicationController
     before_action :authenticate_user!, :only => [:index]
+    # before_action redirect_to main_app.root_path unless current_user.admin? || current_user.employee?
     def new
         @intervention = Intervention.new
     end
     def index
+        redirect_to main_app.root_path unless current_user.admin? || current_user.employee?
         @customers = Customer.all
         @buildings = Building.all
         @batteries = Battery.all
@@ -29,8 +31,8 @@ class InterventionsController < ApplicationController
             zendesk_message = zendesk_message + "\n Employee : #{@intervention.employee.first_name} #{@intervention.employee.last_name}"
         end
         zendesk_message = zendesk_message + "\n Report description : \n #{@intervention.report}"
-        ZendeskAPI::Ticket.create!($client, :type=> ["Problem", "Question"].sample, :subject => @intervention.customer.company_name, :requester => { :name => "RockeTeam", :email => "rocketeam1234@gmail.com" }, :comment => { :body => "Intervention for : \n #{zendesk_message}" }, :priority => "urgent")
-        # ZendeskAPI::Ticket.create!($client, :type=> ["Problem", "Question"].sample, :subject => @intervention.customer.company_name, :requester => { :name => "David Amyot", :email => "david.amyot@codeboxx.biz" }, :comment => { :body => "Intervention for : \n #{zendesk_message}" }, :priority => "urgent")
+        # ZendeskAPI::Ticket.create!($client, :type=> ["Problem", "Question"].sample, :subject => @intervention.customer.company_name, :requester => { :name => "RockeTeam", :email => "rocketeam1234@gmail.com" }, :comment => { :body => "Intervention for : \n #{zendesk_message}" }, :priority => "urgent")
+        ZendeskAPI::Ticket.create!($client, :type=> ["Problem", "Question"].sample, :subject => @intervention.customer.company_name, :requester => { :name => "David Amyot", :email => "david.amyot@codeboxx.biz" }, :comment => { :body => "Intervention for : \n #{zendesk_message}" }, :priority => "urgent")
         @intervention.save
         redirect_to interventions_path
     end

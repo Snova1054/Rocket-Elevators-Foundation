@@ -11,3 +11,4 @@
 - Also don't forget to input a Description!
 #### The other choices are optional, but you they will also be sent to the server and towards ZenDesk. And yes, we got ZenDesk working!
 ### That's it for the new things on the Website, Thank you!
+##### PS: there's also the Postman's json link for the REST API and the GraphQL API : https://www.getpostman.com/collections/934873d458461ef860a0
